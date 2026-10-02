@@ -1,0 +1,87 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1-create-users-table
+      author: ms-auth
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: email
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: password
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: role
+                  type: VARCHAR(50)
+                  defaultValue: USER
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: 2-insert-default-users
+      author: ms-auth
+      changes:
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: name
+                  value: "Admin EventPass"
+              - column:
+                  name: email
+                  value: "admin@eventpass.com"
+              - column:
+                  name: password
+                  value: "admin123"
+              - column:
+                  name: role
+                  value: "STAFF"
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: name
+                  value: "Staff EventPass"
+              - column:
+                  name: email
+                  value: "staff@eventpass.com"
+              - column:
+                  name: password
+                  value: "staff123"
+              - column:
+                  name: role
+                  value: "STAFF"
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: name
+                  value: "Demo User"
+              - column:
+                  name: email
+                  value: "user@eventpass.com"
+              - column:
+                  name: password
+                  value: "user123"
+              - column:
+                  name: role
+                  value: "USER"
